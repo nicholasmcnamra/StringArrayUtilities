@@ -157,6 +157,7 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
         ArrayList<String> newArray = new ArrayList<>();
+        //add first element so we can start incrementor of loop at 1 without going out of bounds
         newArray.add(array[0]);
 
         for(int i = 1; i < array.length; i++) {
@@ -172,8 +173,24 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-
-        return null;
+        ArrayList<String> arrayList = new ArrayList<>();
+        StringBuilder addStringToNewArray = new StringBuilder();
+        addStringToNewArray.append(array[0]);
+        //get each string element in parameter array
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == array[i-1]) {
+                addStringToNewArray.append(array[i]);
+            }
+            else {
+                arrayList.add(String.valueOf(addStringToNewArray));
+                addStringToNewArray = new StringBuilder(array[i]);
+                // set string to add to array to value of index
+            }
+        }
+        arrayList.add(String.valueOf(addStringToNewArray));
+        // get last value and add to arraylist
+        System.out.println(arrayList);
+        return arrayList.toArray(new String[0]);
     }
 
 
